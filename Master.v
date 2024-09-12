@@ -6,6 +6,8 @@
                input[6:0] pwrite_addr,
                input[6:0] pread_addr,
                input write_read,
+               //output reg PSELECT1,
+               //output reg PSELECT2,
                output reg PSELECT1,
                output reg PSELECT2,
                output reg PENABLE,
@@ -64,8 +66,9 @@ SETUP: begin
     end else if(!write_read) begin
         PADDR=pread_addr;
     end
-    PSELECT1= PADDR[6] ? 1'b1 : 1'b0;
-    PSELECT2= PADDR[6] ? 1'b0 : 1'b1;
+  /*  PSELECT1= PADDR[6] ? 1'b1 : 1'b0;
+    PSELECT2= PADDR[6] ? 1'b0 : 1'b1; */
+    {PSELECT1,PSELECT2}=((state != IDLE) ? (PADDR[6] ? {1'b1,1'b0} : {1'b0,1'b1}) : 2'd0);
     if(PSELECT1 || PSELECT2) begin
         next_state=ENABLE;
     end else begin
@@ -98,7 +101,6 @@ end
 default: next_state=IDLE;
     endcase
 end
-    
 always@(*) begin
     if(!PRESET) begin
         error1=0;
