@@ -1,6 +1,6 @@
 module Slave2(input PCLK,input PRESET,input PENABLE,input PWRITE,input[6:0] PADDR,input[7:0] PWDATA,output reg[7:0] PRDATA,output reg PREADY,output PSLVERR,input PSELECT2);
   
-  reg[7:0] memory2[0:63];
+  reg[7:0] memory2[0:127];
   
   always@(*)begin
     
