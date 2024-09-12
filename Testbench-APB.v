@@ -114,7 +114,7 @@ always #5 PCLK=~PCLK;
     for(i=0;i<6;i=i+1) begin
       pwrite_addr={1'b0,i[5:0]};
       #10;
-      data_in=2*i;
+      data_in=i*i;
       //#20; correct
       #10;
     end
