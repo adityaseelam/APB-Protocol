@@ -68,7 +68,7 @@ SETUP: begin
     end
   /*  PSELECT1= PADDR[6] ? 1'b1 : 1'b0;
     PSELECT2= PADDR[6] ? 1'b0 : 1'b1; */
-    {PSELECT1,PSELECT2}=((state != IDLE) ? (PADDR[6] ? {1'b1,1'b0} : {1'b0,1'b1}) : 2'd0);
+    {PSELECT1,PSELECT2}=PADDR[6] ? {1'b1,1'b0} : {1'b0,1'b1} ;
     if(PSELECT1 || PSELECT2) begin
         next_state=ENABLE;
     end else begin
